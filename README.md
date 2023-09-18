@@ -1,53 +1,70 @@
-# Generic Serializable Dictionary
-Lightweight and minimalist dictionary for Unity 2020.1.x with a native look and feel.
+# Serialized Dictionary
 
-## What
-* Uses plain System.Collections.Generic objects in combination with Unity's generic serializer.
+* Serialized Dictionary for Unity with native look and feel
+* Unity minimum version: **2020.1**
+* Current version: **0.1.0**
+* License: **MIT**
 
-* Implements the IDictionary interface and can also be passed around as an ICollection.
+## Summary
 
-* Optional property drawer that displays the Dictionary near pixel perfectly as a List but with standard spacing between each KeyValue-pair (to make it easier on the eyes).
-
-![](example.gif)
-
-* Zero boilerplate, declare your field and start using it! See Example.cs for specifics.
-
-![](code_example1.PNG)
-
-## Why 
-
-As of 2020.1.0a Unity supports generic serialization and native support for displaying generic Lists in the inspector. But for a long time the community has wanted a generic Dictionary implementation that doesn't require you to add boilerplate for each concrete Dictionary type.
-
-Also, personally I'm not a fan of heavily decorated or bloated inspectors that deviate from Unity's standard inspector look and feel. This dictionary aims to look and work like the standard components you already know and use.
-
-## How
-
-The GenericDictionary class contains all the interesting bits. It implements the IDictionary interface to behave as a standard generic dictionary. But it also implements ISerializationCallback to receive serialization callbacks - upon (de)serialization it syncs the backend Dictionary with the frontend List. If there are any key collisions the property drawer displays a standard helpbox to highlight this.
-
-No datastructures were harmed or modified when creating this: it's all just plain old System.Collections.Generic but used behind a IDictionary interface used together with Unitys generic serializer to display a native feeling Dictionary in the inspector.
+As of 2020.1.x Unity supports generic serialization and native support for displaying generic Lists in the inspector. 
+But for a long time the community has wanted a generic Dictionary implementation that doesn't require you to add boilerplate for each concrete Dictionary type.
 
 ## Features
 
-* Native look and feel, renders much like a List<T> (with some enhancements to visability/useability).
+* Uses plain ``System.Collections.Generic`` objects in combination with Unity's generic serializer.
+* Implements the ``IDictionary`` interface and can also be passed around as an ICollection.
+* Optional property drawer that displays the Dictionary as a List but with standard spacing between each KeyValue-pair (to make it easier on the eyes).
 
-* Runtime additions to the Dictionary immediately show up in the inspector (see Example.cs).
-
-* Works regardless of context, use in MonoBehaviours and the runtime additions are cleared from the dictionary - or use in ScriptableObjects and the runtime additions remain serialized - just as expected.
+![](/Docs~/Inspector.gif)
 
 * The custom property drawer displays a standard warning box for key collisions - similar to the floating point precision warning in the Transform component.
 
-![](propertydrawerexample.PNG)
+![](/Docs~/InspectorWithError.png)
 
-## How to use
 
-This repo is a regular Unity project, so you have two choices:
-* Clone the repo and open the project in Unity and give it a spin.
+## How To Use
 
-* Copy GenericDictionary.cs into your Asset folder and the GenericDictionaryPropertyDrawer.cs into an Editor folder and you're good to go.
+Zero boilerplate, declare your field and start using it!
 
-## Requirements
+```csharp
+using UnityEngine;
+using ActionCode.SerializedDictionaries;
 
-A Unity version with support for generic serialization (currently 2020.1.x and above).
+namespace YourNamespace
+{
+    [DisallowMultipleComponent]
+    public sealed class Example : MonoBehaviour
+    {
+        [SerializeField] private SerializedDictionary<string, GameObject> myGenericDict;
+    }
+}
+```
 
-## License
-Licensed under MIT, see license file.
+## Installation
+
+### Using the Package Registry Server
+
+Follow the instructions inside [here](https://cutt.ly/ukvj1c8) and the package **ActionCode-Serialized Dictionary** 
+will be available for you to install using the **Package Manager** windows.
+
+### Using the Git URL
+
+You will need a **Git client** installed on your computer with the Path variable already set. 
+
+- Use the **Package Manager** "Add package from git URL..." feature and paste this URL: `https://github.com/HyagoOliveira/SerializedDictionary.git`
+
+- You can also manually modify you `Packages/manifest.json` file and add this line inside `dependencies` attribute: 
+
+```json
+"com.actioncode.serialized-dictionary":"https://github.com/HyagoOliveira/SerializedDictionary.git"
+```
+
+---
+
+**Hyago Oliveira**
+
+[GitHub](https://github.com/HyagoOliveira) -
+[BitBucket](https://bitbucket.org/HyagoGow/) -
+[LinkedIn](https://www.linkedin.com/in/hyago-oliveira/) -
+<hyagogow@gmail.com>
