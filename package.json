@@ -1,0 +1,25 @@
+{
+  "name": "com.actioncode.serialized-dictionary",
+  "displayName": "ActionCode-Serialized Dictionary",
+  "version": "0.1.0",
+  "unity": "2020.1",
+  "description": "Serialized Dictionary for Unity with native look and feel.",
+  "keywords": [
+    "Dictionary",
+    "Serialization"
+  ],
+  "category": "Scripts",
+  "dependencies": {},
+  "license": "MIT",
+  "homepage": "https://github.com/HyagoOliveira/SerializedDictionary#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HyagoOliveira/SerializedDictionary.git"
+  },
+  "documentationUrl": "https://github.com/HyagoOliveira/SerializedDictionary#readme",
+  "changelogUrl": "https://github.com/HyagoOliveira/SerializedDictionary/CHANGELOG.md",
+  "author": {
+    "name": "Hyago Oliveira",
+    "email": "hyagogow@gmail.com"
+  }
+}
