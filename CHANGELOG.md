@@ -6,14 +6,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.1.0] - 2022-01-01
+## [1.0.0] - 2023-09-18
 ### Added
+- SerializedDictionary class and property drawer
 - CHANGELOG
-- Package file
+- Package files
 - README
 - LICENSE
 - gitignore
 - Initial commit
 
-[Unreleased]: https://github.com/HyagoOliveira/SerializedDictionary/compare/0.1.0...main
-[0.1.0]: https://github.com/HyagoOliveira/SerializedDictionary/tree/0.1.0/
+[Unreleased]: https://github.com/HyagoOliveira/SerializedDictionary/compare/1.0.0...main
+[1.0.0]: https://github.com/HyagoOliveira/SerializedDictionary/tree/1.0.0/
