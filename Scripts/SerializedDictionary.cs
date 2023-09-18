@@ -16,8 +16,12 @@ namespace ActionCode.SerializedDictionaries
         [SerializeField, HideInInspector] private Dictionary<TKey, int> indexByKey = new Dictionary<TKey, int>();
         [SerializeField, HideInInspector] private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
 
+#pragma warning disable IDE0052 // Remove unread private members
+        [SerializeField, HideInInspector] private bool hasDuplicateKeys; // used by SerializedDictionaryPropertyDrawer
+#pragma warning restore IDE0052 // Remove unread private members
+
         public int Count => dict.Count;
-        public bool IsReadOnly { get; set; }
+        public bool IsReadOnly { get; private set; }
 
         public TValue this[TKey key]
         {
@@ -50,6 +54,7 @@ namespace ActionCode.SerializedDictionaries
         {
             dict.Clear();
             indexByKey.Clear();
+            hasDuplicateKeys = false;
 
             for (int i = 0; i < list.Count; i++)
             {
@@ -59,6 +64,7 @@ namespace ActionCode.SerializedDictionaries
                     dict.Add(key, list[i].value);
                     indexByKey.Add(key, i);
                 }
+                else hasDuplicateKeys = true;
             }
         }
 

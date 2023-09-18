@@ -18,10 +18,10 @@ namespace ActionCode.SerializedDictionaries.Editor
         {
             // Draw list of key/value pairs.
             var list = property.FindPropertyRelative("list");
-            EditorGUI.PropertyField(position, list, label, true);
+            EditorGUI.PropertyField(position, list, label, includeChildren: true);
 
             // Draw key collision warning.
-            var keyCollision = property.FindPropertyRelative("keyCollision").boolValue;
+            var keyCollision = GetHasDuplicateKeys(property);
             if (!keyCollision) return;
 
             position.y += EditorGUI.GetPropertyHeight(list, true);
@@ -31,7 +31,7 @@ namespace ActionCode.SerializedDictionaries.Editor
             position.height = lineHeight * warningBoxHeight;
             position = EditorGUI.IndentedRect(position);
 
-            EditorGUI.HelpBox(position, "Duplicate keys will not be serialized.", MessageType.Warning);
+            EditorGUI.HelpBox(position, "Duplicate keys will not be serialized.", MessageType.Error);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -42,7 +42,7 @@ namespace ActionCode.SerializedDictionaries.Editor
             height += EditorGUI.GetPropertyHeight(list, true);
 
             // Height of key collision warning.
-            var keyCollision = property.FindPropertyRelative("keyCollision").boolValue;
+            var keyCollision = GetHasDuplicateKeys(property);
 
             if (keyCollision)
             {
@@ -52,5 +52,8 @@ namespace ActionCode.SerializedDictionaries.Editor
 
             return height;
         }
+
+        private static bool GetHasDuplicateKeys(SerializedProperty property) =>
+            property.FindPropertyRelative("hasDuplicateKeys").boolValue;
     }
 }
