@@ -7,25 +7,25 @@
 
 ## Summary
 
-As of 2020.1.x Unity supports generic serialization and native support for displaying generic Lists in the inspector. 
+As of 2020.1.x, Unity supports generic serialization and native support for displaying generic Lists in the inspector. 
 But for a long time the community has wanted a generic Dictionary implementation that doesn't require you to add boilerplate for each concrete Dictionary type.
 
 ## Features
 
 * Uses plain ``System.Collections.Generic`` objects in combination with Unity's generic serializer.
-* Implements the ``IDictionary`` interface and can also be passed around as an ICollection.
-* Optional property drawer that displays the Dictionary as a List but with standard spacing between each KeyValue-pair (to make it easier on the eyes).
+* Implements the ``IDictionary`` interface and can also be passed around as an ``ICollection``.
+* Property drawer that displays the Dictionary as a List:
 
 ![](/Docs~/Inspector.gif)
 
-* The custom property drawer displays a standard warning box for key collisions - similar to the floating point precision warning in the Transform component.
+* Displays a warning when duplicate keys are found:
 
-![](/Docs~/InspectorWithError.png)
+![](/Docs~/InspectorWithDuplicateKeys.PNG)
 
 
 ## How To Use
 
-Zero boilerplate, declare your field and start using it!
+Zero boilerplate, declare your ``SerializedDictionary`` and start using it!
 
 ```csharp
 using UnityEngine;
