@@ -6,11 +6,11 @@ using UnityEngine;
 namespace ActionCode.SerializedDictionary
 {
     /// <summary>
-    /// Generic Serializable Dictionary for Unity 2020.1 and above.
+    /// Serializable Dictionary.
     /// Simply declare your key/value types and you're good to go - zero boilerplate.
     /// </summary>
     [Serializable]
-    public class GenericDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
+    public class SerializedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField] private List<KeyValuePair> list = new List<KeyValuePair>();
         [SerializeField, HideInInspector] private Dictionary<TKey, int> indexByKey = new Dictionary<TKey, int>();

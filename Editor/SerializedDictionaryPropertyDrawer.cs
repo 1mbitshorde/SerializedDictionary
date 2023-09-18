@@ -6,8 +6,8 @@ namespace ActionCode.SerializedDictionary.Editor
     /// <summary>
     /// Draws the dictionary and a warning-box if there are duplicate keys.
     /// </summary>
-    [CustomPropertyDrawer(typeof(GenericDictionary<,>))]
-    public class GenericDictionaryPropertyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(SerializedDictionary<,>))]
+    public class SerializedDictionaryPropertyDrawer : PropertyDrawer
     {
         private const float warningBoxHeight = 1.5f;
 
