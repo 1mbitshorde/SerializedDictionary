@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ActionCode.SerializedDictionary.Editor
+namespace ActionCode.SerializedDictionaries.Editor
 {
     /// <summary>
     /// Draws the dictionary and a warning-box if there are duplicate keys.

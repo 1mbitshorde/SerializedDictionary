@@ -1,6 +1,6 @@
 {
     "name": "ActionCode.SerializedDictionary",
-    "rootNamespace": "ActionCode.SerializedDictionary",
+    "rootNamespace": "ActionCode.SerializedDictionaries",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

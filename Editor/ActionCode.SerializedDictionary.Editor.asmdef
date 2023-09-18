@@ -1,6 +1,6 @@
 {
     "name": "ActionCode.SerializedDictionary.Editor",
-    "rootNamespace": "ActionCode.SerializedDictionary.Editor",
+    "rootNamespace": "ActionCode.SerializedDictionaries.Editor",
     "references": [
         "GUID:b6d604d366204e3498891d6d6ba5936e"
     ],

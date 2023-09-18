@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ActionCode.SerializedDictionary
+namespace ActionCode.SerializedDictionaries
 {
     /// <summary>
     /// Serializable Dictionary.
     /// Simply declare your key/value types and you're good to go - zero boilerplate.
     /// </summary>
     [Serializable]
-    public class SerializedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
+    public sealed class SerializedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField] private List<KeyValuePair> list = new List<KeyValuePair>();
         [SerializeField, HideInInspector] private Dictionary<TKey, int> indexByKey = new Dictionary<TKey, int>();
