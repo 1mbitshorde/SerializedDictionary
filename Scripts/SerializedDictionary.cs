@@ -12,9 +12,9 @@ namespace ActionCode.SerializedDictionaries
     [Serializable]
     public sealed class SerializedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
-        [SerializeField] private List<KeyValuePair> list = new List<KeyValuePair>();
-        [SerializeField, HideInInspector] private Dictionary<TKey, int> indexByKey = new Dictionary<TKey, int>();
-        [SerializeField, HideInInspector] private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
+        [SerializeField] private List<KeyValuePair> list;
+        [SerializeField, HideInInspector] private readonly Dictionary<TKey, int> indexByKey;
+        [SerializeField, HideInInspector] private readonly Dictionary<TKey, TValue> dict;
 
         public int Count => dict.Count;
         public bool IsReadOnly { get; private set; }
@@ -44,6 +44,13 @@ namespace ActionCode.SerializedDictionaries
         public ICollection<TKey> Keys => dict.Keys;
         public ICollection<TValue> Values => dict.Values;
 
+        public SerializedDictionary(int capacity = 10)
+        {
+            list = new List<KeyValuePair>(capacity);
+            indexByKey = new Dictionary<TKey, int>(capacity);
+            dict = new Dictionary<TKey, TValue>(capacity);
+        }
+
         // Lists are serialized natively by Unity, no custom implementation needed.
         public void OnBeforeSerialize() { }
 
@@ -68,9 +75,9 @@ namespace ActionCode.SerializedDictionaries
 
         public void Add(TKey key, TValue value)
         {
-            dict.Add(key, value);
+            dict.TryAdd(key, value);
             list.Add(new KeyValuePair(key, value));
-            indexByKey.Add(key, list.Count - 1);
+            indexByKey.TryAdd(key, list.Count - 1);
         }
 
         public bool ContainsKey(TKey key) => dict.ContainsKey(key);
