@@ -17,7 +17,7 @@ namespace ActionCode.SerializedDictionaries.Editor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             // Draw list of key/value pairs.
-            var list = property.FindPropertyRelative("list");
+            var list = GetListProperty(property);
             EditorGUI.PropertyField(position, list, label, includeChildren: true);
 
             // Draw key collision warning.
@@ -38,12 +38,12 @@ namespace ActionCode.SerializedDictionaries.Editor
         {
             // Height of KeyValue list.
             var height = 0f;
-            var list = property.FindPropertyRelative("list");
+            var list = GetListProperty(property);
+
             height += EditorGUI.GetPropertyHeight(list, true);
 
             // Height of key collision warning.
             var keyCollision = GetHasDuplicateKeys(property);
-
             if (keyCollision)
             {
                 height += warningBoxHeight * lineHeight;
@@ -52,6 +52,9 @@ namespace ActionCode.SerializedDictionaries.Editor
 
             return height;
         }
+
+        private static SerializedProperty GetListProperty(SerializedProperty property) =>
+            property.FindPropertyRelative("list");
 
         private static bool GetHasDuplicateKeys(SerializedProperty property)
         {
