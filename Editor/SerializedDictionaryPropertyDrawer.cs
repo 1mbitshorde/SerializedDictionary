@@ -10,13 +10,15 @@ namespace ActionCode.SerializedDictionaries.Editor
     public class SerializedDictionaryPropertyDrawer : PropertyDrawer
     {
         private const float warningBoxHeight = 1.5f;
+        private const string duplicateErrorMsg = "Duplicate keys will not be serialized.";
+
         private static readonly float lineHeight = EditorGUIUtility.singleLineHeight;
         private static readonly float vertSpace = EditorGUIUtility.standardVerticalSpacing;
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             var list = GetListProperty(property);
-            var height = EditorGUI.GetPropertyHeight(list, includeChildren: true);
+            var height = EditorGUI.GetPropertyHeight(list, includeChildren: true) + vertSpace;
 
             // Height of key collision warning.
             var keyCollision = GetHasDuplicateKeys(property);
@@ -35,18 +37,20 @@ namespace ActionCode.SerializedDictionaries.Editor
             var list = GetListProperty(property);
             EditorGUI.PropertyField(position, list, label, includeChildren: true);
 
-            // Draw key collision warning.
             var keyCollision = GetHasDuplicateKeys(property);
-            if (!keyCollision) return;
+            if (keyCollision) DrawKeyCollisionError(position, list);
+        }
 
-            position.y += EditorGUI.GetPropertyHeight(list, true);
+        private static void DrawKeyCollisionError(Rect position, SerializedProperty list)
+        {
+            position.y += EditorGUI.GetPropertyHeight(list, includeChildren: true);
 
             if (!list.isExpanded) position.y += vertSpace;
 
             position.height = lineHeight * warningBoxHeight;
             position = EditorGUI.IndentedRect(position);
 
-            EditorGUI.HelpBox(position, "Duplicate keys will not be serialized.", MessageType.Error);
+            EditorGUI.HelpBox(position, duplicateErrorMsg, MessageType.Error);
         }
 
         private static SerializedProperty GetListProperty(SerializedProperty property) =>
