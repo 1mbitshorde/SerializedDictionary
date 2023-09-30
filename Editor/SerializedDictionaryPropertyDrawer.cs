@@ -53,7 +53,12 @@ namespace ActionCode.SerializedDictionaries.Editor
             return height;
         }
 
-        private static bool GetHasDuplicateKeys(SerializedProperty property) =>
-            property.FindPropertyRelative("hasDuplicateKeys").boolValue;
+        private static bool GetHasDuplicateKeys(SerializedProperty property)
+        {
+            var fieldName = nameof(SerializedDictionary<object, object>.HasDuplicateKeys);
+            var serializedFieldName = $"<{fieldName}>k__BackingField";
+            var field = property.FindPropertyRelative(serializedFieldName);
+            return field.boolValue;
+        }
     }
 }

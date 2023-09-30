@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ActionCode.SerializedDictionaries
 {
     /// <summary>
-    /// Serializable Dictionary.
+    /// Serialized Dictionary.
     /// Simply declare your key/value types and you're good to go - zero boilerplate.
     /// </summary>
     [Serializable]
@@ -16,12 +16,10 @@ namespace ActionCode.SerializedDictionaries
         [SerializeField, HideInInspector] private Dictionary<TKey, int> indexByKey = new Dictionary<TKey, int>();
         [SerializeField, HideInInspector] private Dictionary<TKey, TValue> dict = new Dictionary<TKey, TValue>();
 
-#pragma warning disable IDE0052 // Remove unread private members
-        [SerializeField, HideInInspector] private bool hasDuplicateKeys; // used by SerializedDictionaryPropertyDrawer
-#pragma warning restore IDE0052 // Remove unread private members
-
         public int Count => dict.Count;
         public bool IsReadOnly { get; private set; }
+
+        [field: SerializeField, HideInInspector] public bool HasDuplicateKeys { get; private set; }
 
         public TValue this[TKey key]
         {
@@ -54,7 +52,7 @@ namespace ActionCode.SerializedDictionaries
         {
             dict.Clear();
             indexByKey.Clear();
-            hasDuplicateKeys = false;
+            HasDuplicateKeys = false;
 
             for (int i = 0; i < list.Count; i++)
             {
@@ -64,7 +62,7 @@ namespace ActionCode.SerializedDictionaries
                     dict.Add(key, list[i].value);
                     indexByKey.Add(key, i);
                 }
-                else hasDuplicateKeys = true;
+                else HasDuplicateKeys = true;
             }
         }
 
