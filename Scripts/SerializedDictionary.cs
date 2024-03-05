@@ -84,6 +84,13 @@ namespace ActionCode.SerializedDictionaries
 
         public bool TryGetValue(TKey key, out TValue value) => dict.TryGetValue(key, out value);
 
+        public bool TryGetValueUsingIndex(int index, out TValue value)
+        {
+            var hasValue = list.Count <= index;
+            value = hasValue ? list[index].value : default;
+            return hasValue;
+        }
+
         public bool Remove(TKey key)
         {
             if (dict.Remove(key))
