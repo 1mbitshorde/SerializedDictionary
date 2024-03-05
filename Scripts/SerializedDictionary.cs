@@ -89,9 +89,16 @@ namespace ActionCode.SerializedDictionaries
 
         public bool TryGetValueUsingIndex(int index, out TValue value)
         {
-            var hasValue = list.Count <= index;
-            value = hasValue ? list[index].value : default;
+            var hasValue = TryGetKeyValuePairUsingIndex(index, out KeyValuePair pair);
+            value = pair.value;
             return hasValue;
+        }
+
+        public bool TryGetKeyUsingIndex(int index, out TKey key)
+        {
+            var hasKey = TryGetKeyValuePairUsingIndex(index, out KeyValuePair pair);
+            key = pair.key;
+            return hasKey;
         }
 
         public bool Remove(TKey key)
@@ -154,6 +161,13 @@ namespace ActionCode.SerializedDictionaries
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dict.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => dict.GetEnumerator();
+
+        private bool TryGetKeyValuePairUsingIndex(int index, out KeyValuePair value)
+        {
+            var hasValue = index < list.Count;
+            value = hasValue ? list[index] : default;
+            return hasValue;
+        }
 
         private void UpdateIndexLookup(int removedIndex)
         {
