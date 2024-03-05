@@ -13,8 +13,8 @@ namespace ActionCode.SerializedDictionaries
     public sealed class SerializedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField] private List<KeyValuePair> list;
-        [SerializeField, HideInInspector] private readonly Dictionary<TKey, int> indexByKey;
-        [SerializeField, HideInInspector] private readonly Dictionary<TKey, TValue> dict;
+        [SerializeField, HideInInspector] private Dictionary<TKey, int> indexByKey;
+        [SerializeField, HideInInspector] private Dictionary<TKey, TValue> dict;
 
         public int Count => dict.Count;
         public bool IsReadOnly { get; private set; }
@@ -57,6 +57,9 @@ namespace ActionCode.SerializedDictionaries
         // Populate dictionary with pairs from list and flag key-collisions.
         public void OnAfterDeserialize()
         {
+            dict ??= new Dictionary<TKey, TValue>();
+            indexByKey ??= new Dictionary<TKey, int>();
+
             dict.Clear();
             indexByKey.Clear();
             HasDuplicateKeys = false;

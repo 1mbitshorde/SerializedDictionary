@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - TryGetValueUsingIndex function
 
+### Fixed
+- Editor NullReference error after deserialized internal dictionary
+
 ## [1.1.0] - 2023-09-30
 ### Added
 - Initialize dictionary with option capacity (default is 10)
