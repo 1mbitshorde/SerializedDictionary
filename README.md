@@ -2,7 +2,7 @@
 
 * Serialized Dictionary for Unity with native look and feel
 * Unity minimum version: **2020.1**
-* Current version: **1.1.0**
+* Current version: **1.2.0**
 * License: **MIT**
 
 ## Summary
